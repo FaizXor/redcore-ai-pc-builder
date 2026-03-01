@@ -12,7 +12,7 @@ The system:
 4. Returns a complete build result
 
 **Important:** AI does NOT choose parts randomly.  
-AI only extracts structured intent — the backend rule engine makes the hardware decisions.
+AI only extracts structured intent - the backend rule engine makes the hardware decisions.
 
 ---
 
@@ -82,7 +82,7 @@ User → Framer Input → Worker API → AI extraction → rule engine → JSON 
 ## Goal
 Reduce the fear beginners have when choosing PC parts and simulate how a real technician plans a build.
 
-Work in progress — feedback is welcome.# RedCore AI PC Builder
+Work in progress - feedback is welcome.# RedCore AI PC Builder
 
 RedCore is a student-built web tool that helps beginners design a desktop PC using normal language.
 
