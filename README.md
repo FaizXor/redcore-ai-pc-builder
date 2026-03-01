@@ -1,19 +1,18 @@
 # RedCore AI PC Builder
 
-RedCore is a student-built web tool that helps beginners generate a compatible desktop PC build using normal language.
+RedCore is a student-built web tool that helps beginners design a compatible desktop PC using natural language.
 
 Example input:
 > "I want a gaming PC around $800 for school and esports."
 
 The system:
-1. Uses an AI model to understand the request (budget, purpose, tier)
-2. Applies real PC-building rules (budget allocation + compatibility constraints)
+1. Uses an AI model to understand the request (budget, purpose, performance tier)
+2. Applies real PC-building logic (budget allocation and compatibility rules)
 3. Selects appropriate hardware parts from a database
-4. Returns a complete build result
+4. Returns a complete PC build with explanations
 
-**Important:** AI does NOT choose parts randomly.  
-AI only extracts structured intent - the backend rule engine makes the hardware decisions.
-
+**Important:** The AI does not directly choose components.
+It only extracts the user's intent. All hardware decisions are made by a rule-based backend configuration engine.
 ---
 
 ## Demo Video
@@ -40,15 +39,24 @@ AI only extracts structured intent - the backend rule engine makes the hardware 
 
 ---
 
+### What Problem It Solves
+
+Many beginners want a PC but are afraid of:
+- incompatible parts
+- wasting money on unbalanced builds
+- not understanding technical specifications
+
+RedCore aims to act like a knowledgeable friend who plans a balanced build automatically.
+
+---
+
 ## Modes
 
 ### Beginner Mode (main)
-A user types what they want in a single text box, and the system generates a full build automatically.
+The user types what they want in one text box and the system generates a full compatible build automatically.
 
 ### Experienced Mode (power user)
-For users who already know some parts:
-- the user selects key components (ex: CPU and/or GPU) or sets constraints
-- the system auto-completes the rest of the build with compatible parts
+Users can choose key components (for example CPU or GPU) and the system completes the rest of the build with compatible parts.
 
 ---
 
@@ -60,8 +68,23 @@ After generation, the final build is **exported and shown on a results page** as
 - RAM
 - Storage
 - PSU
-- Case  
+
 Plus short explanations about why each part was chosen and any compromises.
+
+---
+
+### Output
+
+After generation, the system returns a structured build:
+
+- CPU
+- GPU
+- Motherboard
+- RAM
+- Storage
+- PSU
+
+Each component includes a short explanation of why it was selected and any compromises made.
 
 ---
 
@@ -69,11 +92,11 @@ Plus short explanations about why each part was chosen and any compromises.
 
 Frontend: Framer (UI + pages)  
 Backend: Cloudflare Worker (API / rule engine)  
-AI: HuggingFace (Qwen2.5) for extraction only  
+AI: HuggingFace (Qwen2.5) intent extraction only
 Database: Local JSON hardware database (exported from Airtable)
 
 Flow:
-User → Framer Input → Worker API → AI extraction → rule engine → JSON database → Final Build JSON → Results Page
+User → Framer → Worker API → AI extraction → Rule Engine → Hardware Database → Final Build → Results Page
 
 ---
 
@@ -83,7 +106,7 @@ User → Framer Input → Worker API → AI extraction → rule engine → JSON 
 ✅ AI extraction working (budget/purpose/tier)  
 ✅ JSON database migration completed (Airtable → JSON)  
 ✅ GPU selection engine implemented with downgrade safety  
-✅ CPU selection engine implemented using GPU requirements + budget
+✅ CPU selection based on GPU requirements and budget
 
 ---
 
@@ -92,8 +115,8 @@ User → Framer Input → Worker API → AI extraction → rule engine → JSON 
 - Motherboard selection (socket + RAM type match)
 - PSU selection (wattage + connectors)
 - Storage selection
-- Final formatting + better explanations on the results page
-- Later: 3D PC preview
+- Improved results page explanations
+- Later: interactive 3D PC preview
 
 ---
 
@@ -101,4 +124,3 @@ User → Framer Input → Worker API → AI extraction → rule engine → JSON 
 Reduce the fear beginners have when choosing PC parts and simulate how a real technician plans a build.
 
 Work in progress - feedback is welcome.
-This is a learning project and work in progress.
