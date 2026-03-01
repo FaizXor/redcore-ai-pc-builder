@@ -27,7 +27,7 @@ AI only extracts structured intent - the backend rule engine makes the hardware 
 ![Design](https://raw.githubusercontent.com/FaizXor/redcore-ai-pc-builder/main/demo4.png)
 
 ## System Workflow
-![Workflow](https://raw.githubusercontent.com/USERNAME/REPO/main/system-flow.png)
+![Workflow](https://raw.githubusercontent.com/FaizXor/redcore-ai-pc-builder/main/system-flow.png)
 
 ---
 
