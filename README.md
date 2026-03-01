@@ -8,6 +8,13 @@
 <h1 align="center">RedCore AI PC Builder</h1>
 <p align="center"><i>Describe a PC in plain English. Get a compatible build.</i></p>
 
+---
+
+🔗 Demo Video: https://www.youtube.com/watch?v=nRa5SJxBWAM  
+📄 System Workflow: see images below  
+🧠 Status: Backend engine and UI in progress
+
+---
 
 RedCore is a student-built web tool that helps beginners design a compatible desktop PC using natural language.
 
