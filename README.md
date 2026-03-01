@@ -18,7 +18,16 @@ AI only extracts structured intent - the backend rule engine makes the hardware 
 
 ## Demo Video
 Paste your YouTube demo link here:
-https://youtube.com/yourvideo
+[https://youtube.com/yourvideo](https://www.youtube.com/watch?v=nRa5SJxBWAM)
+
+## Design Concept
+![Design](demo1.png)
+![Design](demo2.png)
+![Design](demo3.png)
+![Design](demo4.png)
+
+## System Workflow
+![Workflow](system-flow.png)
 
 ---
 
