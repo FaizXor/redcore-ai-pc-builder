@@ -126,4 +126,7 @@ User → Framer → Worker API → AI extraction → Rule Engine → Hardware Da
 ## Goal
 Reduce the fear beginners have when choosing PC parts and simulate how a real technician plans a build.
 
+## Devlog
+Initial public repository created and documentation prepared.
+
 Work in progress - feedback is welcome.
