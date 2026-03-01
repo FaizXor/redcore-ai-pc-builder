@@ -1,0 +1,92 @@
+[
+  {
+    "Name": "Ryzen 5 3600",
+    "Price": "140.0",
+    "CPU_Level_Number": "1",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to pair efficiently with entry-level GPUs, providing smooth system responsiveness without increasing costs unnecessarily.",
+    "Description": "Reliable multi-core processor for gaming and daily use.\n"
+  },
+  {
+    "Name": "Ryzen 5 5500",
+    "Price": "150.0",
+    "CPU_Level_Number": "1",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to pair efficiently with entry-level GPUs, providing smooth system responsiveness without increasing costs unnecessarily.",
+    "Description": "Reliable multi-core processor for gaming and daily use.\n"
+  },
+  {
+    "Name": "Ryzen 5 5600",
+    "Price": "170.0",
+    "CPU_Level_Number": "2",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to pair efficiently with entry-level GPUs, providing smooth system responsiveness without increasing costs unnecessarily.",
+    "Description": "Reliable multi-core processor for gaming and daily use.\n"
+  },
+  {
+    "Name": "Ryzen 5 5600X",
+    "Price": "190.0",
+    "CPU_Level_Number": "2",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Selected to handle modern games, background applications, and light content creation without performance bottlenecks.",
+    "Description": "Strong gaming and multitasking performance.\n"
+  },
+  {
+    "Name": "Ryzen 7 5700X",
+    "Price": "240.0",
+    "CPU_Level_Number": "2",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Selected to handle modern games, background applications, and light content creation without performance bottlenecks.",
+    "Description": "Strong gaming and multitasking performance.\n"
+  },
+  {
+    "Name": "Ryzen 7 5800",
+    "Price": "260.0",
+    "CPU_Level_Number": "2",
+    "Watt Usage": "65",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Selected to handle modern games, background applications, and light content creation without performance bottlenecks.",
+    "Description": "Strong gaming and multitasking performance.\n"
+  },
+  {
+    "Name": "Ryzen 7 5800X",
+    "Price": "300.0",
+    "CPU_Level_Number": "3",
+    "Watt Usage": "105",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to fully support high-performance GPUs and heavy multitasking, ensuring consistent performance under intensive workloads.",
+    "Description": "High-end processor for demanding workloads.\n"
+  },
+  {
+    "Name": "Ryzen 9 5900X",
+    "Price": "380.0",
+    "CPU_Level_Number": "3",
+    "Watt Usage": "105",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to fully support high-performance GPUs and heavy multitasking, ensuring consistent performance under intensive workloads.",
+    "Description": "High-end processor for demanding workloads.\n"
+  },
+  {
+    "Name": "Ryzen 7 5800X3D",
+    "Price": "350.0",
+    "CPU_Level_Number": "3",
+    "Watt Usage": "105",
+    "Supported RAM Type": "DDR4",
+    "Socket": "AM4",
+    "Why this part": "Chosen to fully support high-performance GPUs and heavy multitasking, ensuring consistent performance under intensive workloads.",
+    "Description": "High-end processor for demanding workloads.\n"
+  }
+]
