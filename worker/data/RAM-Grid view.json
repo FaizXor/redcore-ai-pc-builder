@@ -1,0 +1,56 @@
+[
+  {
+    "Name": "16GB DDR4 3200 (2x16GB)",
+    "CapacityGB": "16",
+    "SpeedMhz": "3200",
+    "DDRType": "DDR4",
+    "Price": "130.0",
+    "Why this part": "Selected to meet essential system requirements and maintain smooth gameplay without exceeding the budget.\n",
+    "Description": "Stable DDR4 memory for modern gaming.\n"
+  },
+  {
+    "Name": "16GB DDR4 3600 (2x16GB)",
+    "CapacityGB": "16",
+    "SpeedMhz": "3600",
+    "DDRType": "DDR4",
+    "Price": "150.0",
+    "Why this part": "Selected to meet essential system requirements and maintain smooth gameplay without exceeding the budget.\n",
+    "Description": "Stable DDR4 memory for modern gaming.\n"
+  },
+  {
+    "Name": "32GB DDR4 3200 (2x32GB)",
+    "CapacityGB": "32",
+    "SpeedMhz": "3200",
+    "DDRType": "DDR4",
+    "Price": "380.0",
+    "Why this part": "Chosen to improve system responsiveness during gaming and background processes, reducing slowdowns in heavier usage scenarios.",
+    "Description": "High-speed memory for smoother multitasking.\n"
+  },
+  {
+    "Name": "32GB DDR4 3600 (2x32GB)",
+    "CapacityGB": "32",
+    "SpeedMhz": "3600",
+    "DDRType": "DDR4",
+    "Price": "420.0",
+    "Why this part": "Chosen to improve system responsiveness during gaming and background processes, reducing slowdowns in heavier usage scenarios.",
+    "Description": "High-speed memory for smoother multitasking.\n"
+  },
+  {
+    "Name": "32GB DDR4 4000 (2x32GB)",
+    "CapacityGB": "32",
+    "SpeedMhz": "4000",
+    "DDRType": "DDR4",
+    "Price": "480.0",
+    "Why this part": "Selected to provide performance headroom for demanding games, content creation, and advanced multitasking needs.",
+    "Description": "Large-capacity, high-speed memory kit."
+  },
+  {
+    "Name": "64GB DDR4 3600 (2x64GB)",
+    "CapacityGB": "64",
+    "SpeedMhz": "3600",
+    "DDRType": "DDR4",
+    "Price": "700.0",
+    "Why this part": "Selected to provide performance headroom for demanding games, content creation, and advanced multitasking needs.",
+    "Description": "Large-capacity, high-speed memory kit."
+  }
+]

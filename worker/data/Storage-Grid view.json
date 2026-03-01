@@ -1,0 +1,29 @@
+[
+  {
+    "Name": "500GB NVMe SSD",
+    "Tier": "Entry",
+    "Capacity": "500",
+    "Type": "NVMe Gen3",
+    "Price": "40",
+    "Why this part": "Selected to significantly improve system responsiveness compared to traditional storage while keeping costs under control.\n",
+    "Description": "Fast NVMe SSD for quick boot and load times.\n"
+  },
+  {
+    "Name": "1TB NVMe SSD",
+    "Tier": "Mid",
+    "Capacity": "1000",
+    "Type": "NVMe Gen3",
+    "Price": "70",
+    "Why this part": "Chosen to balance fast performance with enough storage space for modern game libraries and essential applications.\n",
+    "Description": "High-speed SSD with larger capacity.\n"
+  },
+  {
+    "Name": "2TB NVMe SSD",
+    "Tier": "High",
+    "Capacity": "2000",
+    "Type": "NVMe Gen4",
+    "Price": "120",
+    "Why this part": "Selected to handle large game collections, demanding workloads, and fast data transfers without storage limitations.",
+    "Description": "Large, high-performance NVMe storage."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "Name": "450W 80+ Bronze PSU",
+    "Wattage": "450",
+    "Efficiency": "Bronze",
+    "Tier": "Entry",
+    "pcie_8pin_count": "1",
+    "Price": "60.0",
+    "Why this part": "Chosen to safely meet the system’s power requirements while maintaining affordability and stable operation.\n",
+    "Description": "Efficient power supply for basic systems.\n"
+  },
+  {
+    "Name": "500W 80+ Bronze PSU",
+    "Wattage": "500",
+    "Efficiency": "Bronze",
+    "Tier": "Entry",
+    "pcie_8pin_count": "1",
+    "Price": "70.0",
+    "Why this part": "Chosen to safely meet the system’s power requirements while maintaining affordability and stable operation.\n",
+    "Description": "Efficient power supply for basic systems.\n"
+  },
+  {
+    "Name": "550W 80+ Bronze PSU",
+    "Wattage": "550",
+    "Efficiency": "Bronze",
+    "Tier": "Entry",
+    "pcie_8pin_count": "2",
+    "Price": "80.0",
+    "Why this part": "Chosen to safely meet the system’s power requirements while maintaining affordability and stable operation.\n",
+    "Description": "Efficient power supply for basic systems.\n"
+  },
+  {
+    "Name": "550W 80+ Gold PSU",
+    "Wattage": "550",
+    "Efficiency": "Gold",
+    "Tier": "Mid",
+    "pcie_8pin_count": "2",
+    "Price": "90.0",
+    "Why this part": "Selected to provide stable power delivery for stronger components while allowing moderate upgrade flexibility.\n",
+    "Description": "Higher wattage with improved efficiency.\n"
+  },
+  {
+    "Name": "650W 80+ Gold PSU",
+    "Wattage": "650",
+    "Efficiency": "Gold",
+    "Tier": "Mid",
+    "pcie_8pin_count": "2",
+    "Price": "105.0",
+    "Why this part": "Selected to provide stable power delivery for stronger components while allowing moderate upgrade flexibility.\n",
+    "Description": "Higher wattage with improved efficiency.\n"
+  },
+  {
+    "Name": "750W 80+ Gold PSU",
+    "Wattage": "750",
+    "Efficiency": "Gold",
+    "Tier": "Mid",
+    "pcie_8pin_count": "2",
+    "Price": "125.0",
+    "Why this part": "Selected to provide stable power delivery for stronger components while allowing moderate upgrade flexibility.\n",
+    "Description": "Higher wattage with improved efficiency.\n"
+  },
+  {
+    "Name": "850W 80+ Gold PSU",
+    "Wattage": "850",
+    "Efficiency": "Gold",
+    "Tier": "High",
+    "pcie_8pin_count": "3",
+    "Price": "150.0",
+    "Why this part": "Chosen to ensure long-term system stability, safe operation under heavy load, and sufficient headroom for future upgrades.",
+    "Description": "High-capacity, high-efficiency power unit."
+  },
+  {
+    "Name": "1000W 80+ Gold PSU",
+    "Wattage": "1000",
+    "Efficiency": "Gold",
+    "Tier": "High",
+    "pcie_8pin_count": "4",
+    "Price": "190.0",
+    "Why this part": "Chosen to ensure long-term system stability, safe operation under heavy load, and sufficient headroom for future upgrades.",
+    "Description": "High-capacity, high-efficiency power unit."
+  },
+  {
+    "Name": "1200W 80+ Gold PSU",
+    "Wattage": "1200",
+    "Efficiency": "Gold",
+    "Tier": "High",
+    "pcie_8pin_count": "4",
+    "Price": "230.0",
+    "Why this part": "Chosen to ensure long-term system stability, safe operation under heavy load, and sufficient headroom for future upgrades.",
+    "Description": "High-capacity, high-efficiency power unit."
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "B450 AM4 Motherboard",
+    "Chipset": "B450",
+    "Socket": "AM4",
+    "RAMType": "DDR4",
+    "MaxRam_GB": "64",
+    "Tier": "Entry",
+    "M2 Slots": "1",
+    "Price": "100.0",
+    "Why this part": "Chosen to provide reliable compatibility with selected components while keeping the system affordable and functional.\n",
+    "Description": "Essential connectivity and stable power delivery.\n"
+  },
+  {
+    "Name": "B550 AM4 Motherboard",
+    "Chipset": "B550",
+    "Socket": "AM4",
+    "RAMType": "DDR4",
+    "MaxRam_GB": "128",
+    "Tier": "Mid",
+    "M2 Slots": "2",
+    "Price": "140.0",
+    "Why this part": "Selected to ensure stable operation of mid-tier components and allow future upgrades without replacing the board.\n",
+    "Description": "Improved power design with expansion support.\n"
+  },
+  {
+    "Name": "X570 AM4 Motherboard",
+    "Chipset": "X570",
+    "Socket": "AM4",
+    "RAMType": "DDR4",
+    "MaxRam_GB": "128",
+    "Tier": "High",
+    "M2 Slots": "2",
+    "Price": "200.0",
+    "Why this part": "Chosen to fully support high-performance CPUs and GPUs while offering advanced connectivity and long-term upgrade flexibility.\n",
+    "Description": "Premium board with enhanced power and cooling support.\n"
+  }
+]

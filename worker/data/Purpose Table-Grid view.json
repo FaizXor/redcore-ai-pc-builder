@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Gaming",
+    "GPU Tier Rule": "Same",
+    "CPU Tier Rule": "Same",
+    "Preferred_RAM_GB": "16",
+    "Storage Tier Rule": "Same",
+    "PSU Tier Rule": "Same",
+    "Motherboard Tier Rule": "Same"
+  },
+  {
+    "Name": "Competitive Gaming",
+    "GPU Tier Rule": "Same",
+    "CPU Tier Rule": "+1",
+    "Preferred_RAM_GB": "16",
+    "Storage Tier Rule": "Same",
+    "PSU Tier Rule": "Same",
+    "Motherboard Tier Rule": "Same"
+  },
+  {
+    "Name": "Content Creation",
+    "GPU Tier Rule": "Same",
+    "CPU Tier Rule": "+1",
+    "Preferred_RAM_GB": "32",
+    "Storage Tier Rule": "+1",
+    "PSU Tier Rule": "Same",
+    "Motherboard Tier Rule": "Same"
+  },
+  {
+    "Name": "Streaming",
+    "GPU Tier Rule": "Same",
+    "CPU Tier Rule": "+1",
+    "Preferred_RAM_GB": "32",
+    "Storage Tier Rule": "Same",
+    "PSU Tier Rule": "Same",
+    "Motherboard Tier Rule": "Same"
+  },
+  {
+    "Name": "Office/School",
+    "GPU Tier Rule": "-1",
+    "CPU Tier Rule": "Same",
+    "Preferred_RAM_GB": "16",
+    "Storage Tier Rule": "Same",
+    "PSU Tier Rule": "Same",
+    "Motherboard Tier Rule": "Same"
+  }
+]
