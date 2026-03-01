@@ -11,7 +11,9 @@ The system:
 3. Selects appropriate hardware parts from a database
 4. Returns a complete PC build with explanations
 
-**Important:** The AI does not directly choose components.
+**Important:** 
+
+The AI does not directly choose components.
 It only extracts the user's intent. All hardware decisions are made by a rule-based backend configuration engine.
 ---
 
