@@ -5,10 +5,9 @@
   <img src="RedCOREbetalogo.png" width="260">
 </p>
 
-<h1 align="center">RedCore AI PC Builder</h1>
+<h1 align="center">**RedCore AI PC Builder**</h1>
 <p align="center"><i>Describe a PC in plain English. Get a compatible build.</i></p>
 
-# RedCore AI PC Builder
 
 RedCore is a student-built web tool that helps beginners design a compatible desktop PC using natural language.
 
