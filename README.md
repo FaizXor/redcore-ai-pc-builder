@@ -20,14 +20,22 @@ AI only extracts structured intent - the backend rule engine makes the hardware 
 
 ▶ Watch the demo: https://www.youtube.com/watch?v=nRa5SJxBWAM
 
-## Design Concept
-<img src="demo1.png" width="700">
-<img src="demo2.PNG" width="700">
-<img src="demo3.PNG" width="700">
-<img src="demo4.PNG" width="700">
+
+<table>
+<tr>
+<td><img src="demo1.png" width="420"></td>
+<td><img src="demo2.PNG" width="420"></td>
+</tr>
+<tr>
+<td><img src="demo3.PNG" width="420"></td>
+<td><img src="demo4.PNG" width="420"></td>
+</tr>
+</table>
 
 ## System Workflow
-<img src="system-flow.png" width="750">
+<p align="center">
+<img src="system-flow.png" width="850">
+</p>
 
 ---
 
