@@ -1,3 +1,6 @@
+![status](https://img.shields.io/badge/status-WIP-orange)
+![license](https://img.shields.io/badge/license-MIT-green)
+
 # RedCore AI PC Builder
 
 RedCore is a student-built web tool that helps beginners design a compatible desktop PC using natural language.
