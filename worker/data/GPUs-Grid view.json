@@ -1,0 +1,92 @@
+[
+  {
+    "Name": "AMD RX 6600",
+    "Price": "210.0",
+    "Tier": "Entry",
+    "Required CPU Level": "Low",
+    "PCIe 8pin Required": "1",
+    "MinPSU_Wattage": "550",
+    "Why this part": "Selected to deliver stable frame rates in popular competitive and mainstream games while keeping the overall build affordable and well-balanced for entry-level users.",
+    "Description": "1080p gaming performance for esports and modern titles."
+  },
+  {
+    "Name": "AMD RX 6650 XT",
+    "Price": "260.0",
+    "Tier": "Entry",
+    "Required CPU Level": "Low",
+    "PCIe 8pin Required": "1",
+    "MinPSU_Wattage": "600",
+    "Why this part": "Selected to deliver stable frame rates in popular competitive and mainstream games while keeping the overall build affordable and well-balanced for entry-level users.",
+    "Description": "1080p gaming performance for esports and modern titles."
+  },
+  {
+    "Name": "NVIDIA RTX 3050",
+    "Price": "280.0",
+    "Tier": "Entry",
+    "Required CPU Level": "Low",
+    "PCIe 8pin Required": "1",
+    "MinPSU_Wattage": "550",
+    "Why this part": "Selected to deliver stable frame rates in popular competitive and mainstream games while keeping the overall build affordable and well-balanced for entry-level users.",
+    "Description": "1080p gaming performance for esports and modern titles."
+  },
+  {
+    "Name": "RX 6700 XT",
+    "Price": "360.0",
+    "Tier": "Mid",
+    "Required CPU Level": "Medium",
+    "PCIe 8pin Required": "1",
+    "MinPSU_Wattage": "650",
+    "Why this part": "Chosen to provide a noticeable performance upgrade over entry-tier cards, ensuring smooth gameplay at higher settings without creating CPU or power imbalances.",
+    "Description": "High settings at 1080p and strong 1440p performance."
+  },
+  {
+    "Name": "RX 7600",
+    "Price": "350.0",
+    "Tier": "Mid",
+    "Required CPU Level": "Medium",
+    "PCIe 8pin Required": "1",
+    "MinPSU_Wattage": "650",
+    "Why this part": "Chosen to provide a noticeable performance upgrade over entry-tier cards, ensuring smooth gameplay at higher settings without creating CPU or power imbalances.",
+    "Description": "High settings at 1080p and strong 1440p performance."
+  },
+  {
+    "Name": "RTX 3060 12GB",
+    "Price": "340.0",
+    "Tier": "Mid",
+    "Required CPU Level": "Medium",
+    "PCIe 8pin Required": "2",
+    "MinPSU_Wattage": "650",
+    "Why this part": "Chosen to provide a noticeable performance upgrade over entry-tier cards, ensuring smooth gameplay at higher settings without creating CPU or power imbalances.",
+    "Description": "High settings at 1080p and strong 1440p performance."
+  },
+  {
+    "Name": "RX 6800 XT",
+    "Price": "500.0",
+    "Tier": "High",
+    "Required CPU Level": "High",
+    "PCIe 8pin Required": "2",
+    "MinPSU_Wattage": "750",
+    "Why this part": "Selected to maximize gaming performance and visual quality, offering long-term usability for demanding titles and future releases.",
+    "Description": "High frame rates at 1440p and 4K resolutions.\n"
+  },
+  {
+    "Name": "RX 7700 XT",
+    "Price": "480.0",
+    "Tier": "High",
+    "Required CPU Level": "High",
+    "PCIe 8pin Required": "2",
+    "MinPSU_Wattage": "750",
+    "Why this part": "Selected to maximize gaming performance and visual quality, offering long-term usability for demanding titles and future releases.",
+    "Description": "High frame rates at 1440p and 4K resolutions.\n"
+  },
+  {
+    "Name": "RTX 3070",
+    "Price": "500.0",
+    "Tier": "High",
+    "Required CPU Level": "High",
+    "PCIe 8pin Required": "2",
+    "MinPSU_Wattage": "750",
+    "Why this part": "Selected to maximize gaming performance and visual quality, offering long-term usability for demanding titles and future releases.",
+    "Description": "High frame rates at 1440p and 4K resolutions.\n"
+  }
+]
