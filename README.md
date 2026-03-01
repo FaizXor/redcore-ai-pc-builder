@@ -12,7 +12,7 @@
 
 🔗 Demo Video: https://www.youtube.com/watch?v=nRa5SJxBWAM  
 📄 System Workflow: see images below  
-🧠 Status: Backend engine and UI in progress
+🧠 Status: Backend engine and UI are in progress
 
 ---
 
