@@ -132,4 +132,7 @@ Reduce the fear beginners have when choosing PC parts and simulate how a real te
 ## Devlog
 Initial public repository created and documentation prepared.
 
+## Upcoming Work
+Working on RAM and motherboard compatibility logic next.
+
 Work in progress - feedback is welcome.
