@@ -69,6 +69,33 @@ RedCore aims to act like a knowledgeable friend who plans a balanced build autom
 
 ---
 
+### Real User Feedback
+
+Before building RedCore, I shared the idea online to see if the problem actually exists.
+
+These are real responses from PC users and beginners explaining their difficulties when choosing parts and compatibility.
+
+They confirm that many people understand CPUs and GPUs, but struggle with:
+
+- motherboard compatibility
+- PSU wattage
+- trusting their own build choices
+- fear of damaging expensive hardware
+
+This project was created specifically to address those concerns.
+
+*(The following comments were posted by independent users after I shared the early concept of the tool online. They were not 
+asked to promote the project they were reacting to the idea itself.)*
+
+
+![User feedback 1](comment1.png)
+![User feedback 1](comment2.png)
+
+These responses showed that the biggest barrier for beginners is confidence, not price.
+RedCore is designed to guide users automatically and help them trust their build decisions.
+
+---
+
 ## Modes
 
 ### Beginner Mode (main)
