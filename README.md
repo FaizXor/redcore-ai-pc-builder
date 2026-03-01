@@ -13,8 +13,9 @@ The system:
 
 **Important:** 
 
-The AI does not directly choose components.
+**The AI does not directly choose components.**
 It only extracts the user's intent. All hardware decisions are made by a rule-based backend configuration engine.
+
 ---
 
 ## Demo Video
