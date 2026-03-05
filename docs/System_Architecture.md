@@ -18,6 +18,10 @@ The overall architecture of the system is shown in the diagram below.
 
 This diagram shows how the main components of the system communicate with each other.
 
+![System Architecture Diagram](../System/Workflow_Diagram_simple.png)
+
+*Figure: High-level system architecture of the RedCore AI PC Builder.*
+
 ## System Components
 
 The system is divided into several components.
@@ -64,3 +68,4 @@ The final PC build is returned to the frontend and displayed to the user through
 
 The AI model is used only to extract user intent, not to select hardware components.
 All hardware decisions are made by the rule engine, which ensures predictable results and avoids random AI-generated hardware choices.
+
