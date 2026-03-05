@@ -145,28 +145,6 @@ Detailed technical documentation is available in the **Documents** folder:
 
 ---
 
-## Project Structure
-
-RedCore-AI-PC-Builder/
-│
-├ README.md                → Project overview and introduction
-│
-├ Design/                  → UI mockups and design assets
-│
-├ docs/                    → Technical documentation
-│   ├ system_architecture.md
-│   ├ algorithm.md
-│   ├ development_log.md
-│   └ project_overview.md
-│
-├ System/                  → System diagrams and workflow images
-│
-├ Evidence/                → Prototype screenshots and development evidence
-│
-└ Media/                   → Demo images and assets used in the README
-
----
-
 ## Current Progress
 ✅ Framer UI is ~50% designed  
 ✅ Worker API running  
