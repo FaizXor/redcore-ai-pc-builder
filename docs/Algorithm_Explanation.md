@@ -104,4 +104,16 @@ Finally, storage selection is performed based on performance tier and remaining 
 
 If no compatible storage device can be found after the fallback attempts, the system stops and returns an error.
 
+## Algorithm Workflow Diagrams
+
+The following diagrams illustrate the complete rule engine workflow and component selection logic used by the RedCore system.
+
+### Full Algorithm Flow
+
+![Full Algorithm Diagram](../Design/Workflow_Diagram_Full.png)
+
+### Early Algorithm Design
+
+![Early Workflow Design](../Design/Workflow_early_design.jpg)
 Once all components are successfully selected, the algorithm exports the complete build configuration including component names, specifications, and descriptions. The result is sent back to the webhook, which forwards the response to the Framer frontend where the final build is displayed to the user.
+
