@@ -136,6 +136,7 @@ User → Framer → Worker API → AI extraction → Rule Engine → Hardware Da
 ## Documentation
 
 Detailed technical documentation is available in the **Documents** folder:
+📂 Full documentation: [/docs](docs)
 
 - System Architecture
 - Algorithm Explanation
