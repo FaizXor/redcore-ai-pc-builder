@@ -14,7 +14,7 @@ Finally, the selected components are returned as a complete PC build configurati
 ## Architecture Diagram
 
 The overall architecture of the system is shown in the diagram below.
->(User Input → Cloudflare Worker API → AI Extraction → Rule Engine → JSON Hardware Database → Final Build Output)
+The system follows a sequential processing pipeline from user input to final build generation.
 
 This diagram shows how the main components of the system communicate with each other.
 
@@ -68,4 +68,5 @@ The final PC build is returned to the frontend and displayed to the user through
 
 The AI model is used only to extract user intent, not to select hardware components.
 All hardware decisions are made by the rule engine, which ensures predictable results and avoids random AI-generated hardware choices.
+
 
