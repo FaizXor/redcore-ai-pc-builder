@@ -70,6 +70,8 @@ The prototype connected user input with the hardware database and AI extraction.
 
 The automation scenario handled the logic for selecting compatible parts and generating a basic PC build result.
 
+![Make Automation Prototype](../Evidence/make_overview.png)
+
 #### Tools:
 - Make.com (automation system and algorithm prototype)
 - Airtable (hardware database)
@@ -212,3 +214,4 @@ The RedCore AI PC Builder project was developed across multiple phases including
 The project evolved from an initial no-code prototype built in Make.com into a custom backend system implemented using Cloudflare Workers and a JSON hardware database. The final system integrates AI-based input extraction with a rule-based hardware selection engine to generate compatible PC builds from natural language requests.
 
 Total estimated development time: **approximately 135–145 hours.**
+
