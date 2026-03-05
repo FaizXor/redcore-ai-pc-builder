@@ -106,22 +106,9 @@ Users can choose key components (for example CPU or GPU) and the system complete
 
 ---
 
-## Build Result Output (Export)
-After generation, the final build is **exported and shown on a results page** as a structured list/cards, for example:
-- CPU
-- GPU
-- Motherboard
-- RAM
-- Storage
-- PSU
+## Build Result Output
 
-Plus short explanations about why each part was chosen and any compromises.
-
----
-
-### Output
-
-After generation, the system returns a structured build:
+After generation, the system returns a structured build including:
 
 - CPU
 - GPU
@@ -130,7 +117,7 @@ After generation, the system returns a structured build:
 - Storage
 - PSU
 
-Each component includes a short explanation of why it was selected and any compromises made.
+Each component includes a short explanation describing why it was selected and any compromises made during the selection process.
 
 ---
 
@@ -143,6 +130,17 @@ Database: Local JSON hardware database (exported from Airtable)
 
 Flow:
 User → Framer → Worker API → AI extraction → Rule Engine → Hardware Database → Final Build → Results Page
+
+---
+
+## Documentation
+
+Detailed technical documentation is available in the **Documents** folder:
+
+- System Architecture
+- Algorithm Explanation
+- Development Log
+- Project Overview
 
 ---
 
@@ -172,7 +170,14 @@ Reduce the fear beginners have when choosing PC parts and simulate how a real te
 ## Devlog
 Initial public repository created and documentation prepared.
 
+
 ## Upcoming Work
 Working on RAM and motherboard compatibility logic next.
 
 Work in progress - feedback is welcome.
+
+## Author
+
+Student project developed by Faiz.
+
+Built as an experiment in combining AI intent extraction with rule-based hardware selection.
