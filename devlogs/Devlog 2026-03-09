@@ -1,0 +1,30 @@
+# Devlog
+
+## 2026-03-09
+
+**What I worked on:**
+
+* Implemented the **storage selection system** for the PC builder with Entry / Mid / High tiers.
+* Connected storage logic to the **purpose rules table** so storage tier can shift depending on workload.
+* Added fallback logic so storage can **downgrade tiers if the preferred option does not fit the budget**.
+* Implemented the **minimum build fallback system** that generates the cheapest valid PC build when the normal build cannot fit the user’s budget.
+* Created `calculateMinimumRequiredBudget()` to find the cheapest valid combination of GPU, CPU, PSU, motherboard, RAM, and storage.
+* Implemented **recommended normal budget detection** using `calculateRecommendedNormalBudget()` which finds the lowest budget where the normal builder succeeds.
+* Added **upgrade suggestion messages** for users when they receive a minimum fallback build.
+
+**Problems / Debugging:**
+
+* Encountered a **maximum call stack size exceeded error** caused by recursive calls between the budget recommendation system and the build engine.
+* Fixed the recursion issue by adding a control flag so the budget recommendation function can test builds without triggering additional recommendation calculations.
+
+**What I learned:**
+
+* How to design a **fallback system** when constraints prevent the normal algorithm from producing a result.
+* How recursive functions can unintentionally cause **infinite loops** when two systems call each other.
+* How to structure a backend API so the frontend can clearly understand build modes (`normal` vs `minimum-fallback`).
+
+**Next:**
+
+* Complete the **Framer UI** to display build results.
+* Show part cards for GPU, CPU, PSU, motherboard, RAM, and storage.
+* Display upgrade suggestions when the builder returns a minimum fallback build.
