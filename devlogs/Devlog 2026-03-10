@@ -1,0 +1,20 @@
+# Devlog
+
+## 2026-03-10
+
+**What I worked on:**
+* worked on making the beginner page
+* added clickable buttons and texts
+* added cycled placeholder changer to make ui alive
+* made /result page
+* added incompleted design to the /result page
+
+**Problems / Debugging:**
+* Buttons doesn't working when clicking
+* Some ui problems fixed
+* remade the builderoveride to be more stable
+* fixed optimization problems
+
+**Next:**
+* completing /result page 
+* adding live budget slider
