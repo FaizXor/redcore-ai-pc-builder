@@ -1,4 +1,4 @@
-![status](https://img.shields.io/badge/status-WIP-orange)
+![status](https://img.shields.io/badge/status-Active%20Development-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 <p align="center">
@@ -12,7 +12,7 @@
 
 🔗 Demo Video: https://www.youtube.com/watch?v=nRa5SJxBWAM  
 📄 System Workflow: see images below  
-🧠 Status: Backend engine and UI are in progress
+🧠 Status: Core engine complete - expanding compatibility system and UI
 
 ---
 
@@ -133,6 +133,36 @@ User → Framer → Worker API → AI extraction → Rule Engine → Hardware Da
 
 ---
 
+---
+
+## Key Innovation — Adaptive Build Engine
+
+Unlike simple PC builders that rely on fixed budget percentages, RedCore uses an **iterative downgrade system**:
+
+- Starts from a target performance tier
+- Attempts to generate a valid build
+- If any component fails (budget or compatibility), the system automatically downgrades the GPU tier
+- Repeats until a valid configuration is found
+
+This allows the system to:
+
+- Handle unrealistic budgets gracefully
+- Avoid impossible builds
+- Adapt to real-world component pricing
+
+### Additional Intelligence
+
+- **Minimum Budget Fallback**  
+  Generates the cheapest possible valid build when the user's budget is too low
+
+- **Recommended Budget Calculation**  
+  Suggests how much budget is needed for a balanced build
+
+- **Transparent Decision Logic**  
+  Each component includes reasoning and trade-offs
+
+This transforms RedCore from a simple builder into a **decision-making system**.
+
 ## Documentation
 
 Detailed technical documentation is available in the **Documents** folder:
@@ -146,22 +176,18 @@ Detailed technical documentation is available in the **Documents** folder:
 ---
 
 ## Current Progress
-✅ Framer UI is ~50% designed  
+✅ Framer UI is 100% completed
 ✅ Worker API running  
 ✅ AI extraction working (budget/purpose/tier)  
 ✅ JSON database migration completed (Airtable → JSON)  
-✅ GPU selection engine implemented with downgrade safety  
-✅ CPU selection based on GPU requirements and budget
+✅ Build selection completed
+
+Project is finished as Beta
 
 ---
 
 ## Next Steps
-- Add RAM selection rules (capacity + DDR type)
-- Motherboard selection (socket + RAM type match)
-- PSU selection (wattage + connectors)
-- Storage selection
-- Improved results page explanations
-- Later: interactive 3D PC preview
+- shipping it
 
 ---
 
@@ -169,13 +195,28 @@ Detailed technical documentation is available in the **Documents** folder:
 Reduce the fear beginners have when choosing PC parts and simulate how a real technician plans a build.
 
 ## Devlog
-Initial public repository created and documentation prepared.
 
+### Phase 1 — Concept & Validation
+- Idea tested with real users
+- Identified beginner pain points (compatibility, confidence)
 
-## Upcoming Work
-Working on RAM and motherboard compatibility logic next.
+### Phase 2 — Core System Design
+- Designed rule-based architecture
+- Implemented AI intent extraction (budget, purpose, tier)
 
-Work in progress - feedback is welcome.
+### Phase 3 — Engine Implementation
+- Built GPU-first selection logic
+- Added CPU matching system
+
+### Phase 4 — System Evolution (Major Upgrade)
+- Replaced percentage-based allocation with iterative downgrade engine
+- Added fallback system for low budgets
+- Implemented recommendation logic
+
+### Phase 5 — UI Development
+- Built frontend in Framer
+- Added Beginner and Experienced modes
+
 
 ## Author
 
