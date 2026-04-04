@@ -6,11 +6,13 @@ The algorithm solves this problem by converting a natural-language request into 
 
 Instead of allowing the AI to directly choose parts, the AI is only used to extract structured data from the user's request. The actual hardware decisions are performed by the rule engine using predefined compatibility rules and hardware databases.
 
-This design ensures that the final build is consistent, realistic, and technically valid while still allowing the user to interact with the system using simple natural-language input.
+This design ensures that the final build is consistent, realistic, and technically valid while still allowing the user to interact with the system using simple natural-language input. A key feature of the updated algorithm is its Intelligent Cost Saving and Recommendation Engine, which attempts to preserve performance by swapping non-critical parts and provides helpful suggestions when a user's budget is insufficient.
 
 ## Algorithm Explanation
 
-The user types what they want in the Framer frontend. The request is then sent to a webhook hosted on Cloudflare Workers. When the Cloudflare Worker receives the request, it forwards the user's text input to the AI model Qwen 2.5 hosted on HuggingFace.
+The user types what they want in the Framer frontend. The request is then sent to a webhook hosted on Cloudflare Workers. When the Cloudflare Worker receives the request, it first passes through a Validation and Security Layer. This layer sanitizes all inputs to prevent malicious code and applies rate limiting to protect the system from abuse.
+
+Once validated, the user's text input is forwarded to the AI model Qwen 2.5 hosted on HuggingFace.
 
 The AI receives a special prompt designed to extract only three structured values from the user's request: the budget, the purpose of the build, and the performance tier (Entry, Mid, High). The AI does not select hardware parts. Its only task is to convert the natural-language request into structured data.
 
@@ -62,53 +64,132 @@ High = 3**
 
 These numeric values allow the system to perform calculations and tier adjustments.
 
-After the AI returns the extracted JSON, the purpose value is compared with entries inside the Purpose Database. The system retrieves configuration data associated with that purpose. This database contains rules such as tier adjustments and component budget percentages.
+After the AI returns the extracted JSON, the purpose value is compared with entries inside the Purpose Database. This database contains rules such as tier adjustments and component budget percentages. For example, a purpose like Gaming may increase GPU priority, while Office/School may reduce GPU tier expectations.
 
-For example, a purpose like Gaming may increase GPU priority, while Office/School may reduce GPU tier expectations. These adjustments prevent unrealistic builds, such as selecting extremely high-end GPUs for simple office tasks.
+The system then enters the Core Build Loop, which uses a Waterfall Allocation Method. Instead of pre-allocating a fixed budget for every component, this method prioritizes critical parts and uses the remaining funds for support components.
 
-The system then calculates the final GPU tier by combining the extracted tier and the purpose adjustment. Once the final GPU tier is determined, the system begins searching the GPU database.
+**Phase 1: Critical Component Selection**
 
-The GPU is treated as the primary component because it strongly affects the selection of other components in the system.
+The system first calculates a budget for the primary performance components using percentages defined in the purpose configuration table.
 
-When searching the GPU database, the system checks if a suitable GPU exists within the allocated GPU budget. If a GPU is found, the algorithm continues to the CPU selection stage.
+1. **GPU Selection:** The GPU is treated as the primary component. The system calculates a GPU budget and searches the database for a suitable GPU matching the target tier. If no GPU is found, the system downgrades the target tier by one level and retries the search. A downgrade limit of two attempts is implemented to prevent infinite loops.
 
-If no GPU is found, the system downgrades the GPU tier by one level and retries the search. A downgrade limit is implemented to prevent infinite loops. The system allows a maximum of two downgrades because there are only three possible tiers (High, Mid, Entry). Mathematical checks ensure that the tier never goes below Entry.
+2. **CPU Selection:** After a GPU is selected, the system reads its CPU_req parameter, which represents the minimum CPU performance required for system balance. It then searches the CPU database using the calculated CPU budget and the required CPU level. If no suitable CPU is found, the system triggers the same downgrade logic as the GPU selection.
 
-The system also calculates component budgets. The GPU budget is calculated using:
+3. **PSU Selection:** The algorithm extracts the minimum wattage requirement from the selected GPU's data. It searches for a PSU that meets or exceeds this wattage and fits the PSU budget. Unlike GPU or CPU selection, this stage does not allow downgrading; if a suitable PSU is not found, the entire build attempt for that tier fails, triggering a system downgrade.
 
->*Budget × Purpose Percentage × Tier Adjustment*
+**Phase 2: Support Component Selection & Optimization**
 
-Other components use:
+After the three core components are chosen, the system calculates the Remaining Budget by subtracting their cost from the user's total budget.
 
->*Budget × Purpose Percentage*
+4. Motherboard Selection and Optimization: This is a key optimization step.
+   - The system first searches for a motherboard that matches the CPU's socket, the target performance tier, and the remaining budget.
+   - After selecting all four parts (GPU, CPU, PSU, Mobo), it performs a budget check. If the running total exceeds the user's budget, the algorithm does not immediately fail.
+   - Instead, it activates a cost-saving measure: it attempts to swap the selected motherboard for a compatible "Entry" tier model. If this swap brings the total cost back within budget, the build is saved with its high-performance CPU/GPU intact, and the algorithm proceeds.
+    - If the build is still over budget even with the cheapest compatible motherboard, then the motherboard swap is considered a failure, and a full system downgrade is triggered.
 
-These percentages are defined in the purpose configuration table.
+5. RAM Selection: The system uses the final remaining budget to select RAM. It first attempts to purchase the "Preferred" RAM capacity defined in the purpose rules (e.g., 32GB for Content Creation). If the remaining budget is insufficient, it automatically falls back to a lower-capacity but more affordable option (e.g., 16GB) to ensure a complete build is generated.
 
-After a GPU is selected, the system proceeds to CPU selection. The GPU contains a parameter called CPU_req, which represents the minimum CPU performance requirement. This parameter is used to determine the CPU tier required for proper system balance.
+6. Storage Selection: Finally, whatever funds are left after RAM selection are used to purchase the best possible storage drive. The system prioritizes higher-tier storage but will select a lower-tier drive if necessary to fit the last of the budget.
 
-The system searches the CPU database using the calculated CPU budget and the required CPU level. If a compatible CPU is found, the process continues to PSU selection. If no suitable CPU is found, the system performs a downgrade similar to the GPU selection logic.
+**Failure Handling and Output**
 
-For Power Supply Unit (PSU) selection, the algorithm extracts the minimum wattage requirement stored in the GPU data. This value is used to calculate the minimum PSU wattage required for the system.
+If the downgrade loop completes and no build can be found within the budget, the algorithm does not simply stop. It activates the Recommendation Engine, which calculates the absolute minimum budget required to fulfill the user's request. This value is returned as a helpful suggestion (e.g., "A build for this purpose requires at least $650").
 
-Unlike GPU or CPU selection, the PSU stage does not allow downgrading because power requirements must be satisfied to ensure system stability. If a suitable PSU is not found within the budget and wattage requirement, the algorithm stops and returns an error.
+Once a complete build is successfully selected, the system generates the final output. The format of this output depends on the user's mode:
 
-During motherboard selection, the system extracts the CPU socket and preferred chipset information from the selected CPU. It also determines the supported DDR memory type. Chipsets are internally represented as numeric values to simplify comparison.
-
-The system searches the motherboard database using the calculated motherboard budget, socket compatibility, chipset preference, and memory type.
-
-If no motherboard is found with the preferred chipset, the algorithm removes the chipset restriction and limits the search to compatible DDR types (for example DDR4). If a suitable motherboard is still not found, the system stops and returns an error.
-
-For RAM selection, the system uses preferred RAM capacity values defined in the purpose configuration table. Because RAM prices fluctuate frequently, the system includes a fallback mechanism. If an optimal configuration cannot be found, the system defaults to 16 GB of RAM.
-
-Finally, storage selection is performed based on performance tier and remaining budget. The system determines a target storage size and searches the storage database. If a suitable drive is not found, the algorithm reduces the storage size and retries the search.
-
-If no compatible storage device can be found after the fallback attempts, the system stops and returns an error.
+  - **Auto Mode:** The system returns a structured JSON object containing the list of parts. The frontend uses this data to render a series of Visual Component Cards.
+  - **Experienced Mode:** The system runs a final Confidence Report to check for bottlenecks and upgrade paths. This data, along with the build list, is sent to the AI, which generates a detailed Textual Analysis of the build's strengths and weaknesses.
 
 ## Algorithm Workflow Diagrams
 
-The following diagrams illustrate the complete rule engine workflow and component selection logic used by the RedCore system.
+The following diagram illustrates the complete, updated rule engine workflow, including the motherboard swap logic and the different output paths.
 
-### Full Algorithm Flow
+```mermaid
+graph TD
+    %% === STYLES ===
+    classDef security fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000000
+classDef ai fill:#e8eaf6,stroke:#3949ab,stroke-width:2px,color:#000000
+classDef process fill:#e0f7fa,stroke:#006064,stroke-width:2px,color:#000000
+classDef decision fill:#fff9c4,stroke:#f57f17,color:#000000
+classDef success fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000000
+classDef failure fill:#ffcdd2,stroke:#b71c1c,stroke-width:2px,color:#000000
+classDef io fill:#fafafa,stroke:#333,color:#000000
+
+    %% === START AND INPUT ===
+    Start((Start)) --> UserInput[User Input: mode, budget, inputs, etc.]
+    class UserInput io;
+
+    %% === VALIDATION GATEWAY ===
+    UserInput --> Validation{Security & Validation Gateway}
+    class Validation security;
+    Validation -->|Invalid| ReturnValidationError("Return 422 Validation Error")
+    Validation -->|Valid| ModeDecision{Mode?}
+    class ModeDecision decision;
+    class ReturnValidationError failure;
+
+    %% === AUTO vs EXPERIENCED PATHS ===
+    subgraph Auto Mode
+        direction LR
+        AIExtraction[Build Prompt & Call AI] --> ParseAI{Parse AI Response}
+        ParseAI -->|Success| ValidateAI[Validate & Sanitize AI Output]
+        ParseAI -->|Failure / Timeout| FallbackExtraction[Use Regex & Defaults]
+        FallbackExtraction --> IntentReadyA((Intent Ready))
+        ValidateAI --> IntentReadyA
+    end
+    
+    subgraph Experienced Mode
+        direction LR
+        ManualSetup[Use Validated Manual Inputs] --> IntentReadyB((Intent Ready))
+    end
+
+    ModeDecision -->|'auto'| AIExtraction
+    ModeDecision -->|'experienced'| ManualSetup
+
+    class AIExtraction ai;
+    class ParseAI decision;
+    class ManualSetup process;
+
+
+    %% === CONVERGE & PRE-BUILD ANALYSIS ===
+    IntentReadyA --> ProactiveAnalysis["Proactive Budget Analysis<br/><i>calcMinimum/RecommendedBudget()</i>"]
+    IntentReadyB --> ProactiveAnalysis
+    class ProactiveAnalysis process;
+    
+    ProactiveAnalysis --> BuildEngine["Core Build Engine<br/><i>selectCoreBuild() or selectExperiencedBuild()</i>"]
+    class BuildEngine process;
+
+    BuildEngine --> BuildSuccess{Build Successful?}
+    class BuildSuccess decision;
+
+    %% === FAILURE PATH ===
+    BuildSuccess -->|No - Failure| ConstructError[Construct Smart Error Response<br/><i>'Increase budget to $XYZ'</i>]
+    ConstructError --> ReturnError("Return 400 Build Error")
+    class ConstructError process;
+    class ReturnError failure;
+
+    %% === SUCCESS PATH ===
+    BuildSuccess -->|Yes - Success| PostBuildAnalysis["Post-Build Analysis & Enrichment<br/><i>buildConfidenceReport()</i>"]
+    class PostBuildAnalysis process;
+
+    PostBuildAnalysis --> AISummary["AI Chat Summary Generation<br/><i>buildChatSummaryPrompt()</i>"]
+    class AISummary ai;
+
+    AISummary --> AISummaryTimeout{AI Summary Timed Out?}
+    class AISummaryTimeout decision;
+
+    AISummaryTimeout -->|Yes| FallbackSummary[Use Pre-formatted Fallback Summary]
+    class FallbackSummary process;
+    AISummaryTimeout -->|No| FinalAssembly[Final Response Assembly]
+
+    FallbackSummary --> FinalAssembly
+    class FinalAssembly process;
+
+    FinalAssembly --> ReturnSuccess("Return 200 OK")
+    class ReturnSuccess success;  
+```
+
+### Old Algorithm Flow
 
 ![Full Algorithm Diagram](../Design/Workflow_Diagram_Full.png)
 
