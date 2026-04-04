@@ -203,6 +203,65 @@ To solve this, we reviewed all available materials and brainstormed the developm
 By the end of this phase, the project documentation was completed, and all resources were organized into a structured archive, making the project easier to understand, review, and present.
 
 
+### Phase 9 — System Evolution & Feature Expansion
+**~3 weeks × ~3–4h ≈ 60–70 hours**
+
+#### Work:
+During this phase, the RedCore system was significantly improved and expanded beyond the initial prototype.
+
+The core algorithm was redesigned to solve major issues with the original percentage-based budget allocation system. The old system often failed when the budget was too low or when component prices did not align with fixed percentages.
+
+To fix this, a new **iterative downgrade engine** was implemented:
+- The system starts from the target performance tier
+- Attempts to build a valid configuration
+- If any component fails (GPU, CPU, PSU, etc.), the system automatically downgrades the GPU tier
+- The process repeats until a valid and compatible build is found
+
+This made the system much more flexible and realistic under different budget conditions.
+
+#### New Features:
+
+**1. Minimum Build Fallback System**
+- If no valid build fits the user's budget, the system calculates the **minimum required budget**
+- Generates a working build using the cheapest compatible components
+- Provides upgrade suggestions for better configurations
+
+**2. Recommended Budget System**
+- Calculates a **recommended budget** for a balanced build
+- Helps users understand how much they should increase their budget
+
+**3. Experienced Mode**
+- Added a second interface mode for advanced users
+- Displays deeper technical details such as:
+  - Component constraints
+  - Budget breakdowns
+  - Adjustment logic
+- Allows better transparency of the decision system
+
+**4. Improved Error Handling**
+- Instead of failing silently, the system now:
+  - Explains why a build failed
+  - Shows limiting components
+  - Suggests solutions
+
+**5. Budget Validation Logic**
+- Added strict validation to ensure:
+  - RAM and Storage are always affordable
+  - Core components do not consume the entire budget
+- Introduced minimum reserve logic to prevent incomplete builds
+
+#### UI Improvements:
+- Completed full frontend in Framer
+- Implemented:
+  - Beginner Mode (simple output)
+  - Experienced Mode (detailed output)
+- Designed a custom **404 error page** with interactive/glitch visual style to enhance user experience
+
+#### Outcome:
+By the end of this phase, the RedCore system evolved from a basic rule-based builder into a **robust, adaptive build engine** capable of handling real-world constraints, budget limitations, and different user experience levels.
+
+This phase represents the transition from a working prototype to a more complete and user-ready system.
+
 
 - **Phase 1 — Concept Planning (~10h)**
 - **Phase 2 — Hardware Database Creation (~17–18h)**
@@ -212,8 +271,9 @@ By the end of this phase, the project documentation was completed, and all resou
 - **Phase 6 — UI Design in Framer (~32h)**
 - **Phase 7 — Demo Video Recording & Editing (~24–25h)**
 - **Phase 8 — Documentation & Project Organization (~17–18h)**
+- **Phase 9 — System Evolution & Feature Expansion (~60–70)**
 
-**≈ 135–145 hours**
+**≈ 190-200 hours**
 
 
 ### Development Summary
@@ -222,7 +282,5 @@ The RedCore AI PC Builder project was developed across multiple phases including
 
 The project evolved from an initial no-code prototype built in Make.com into a custom backend system implemented using Cloudflare Workers and a JSON hardware database. The final system integrates AI-based input extraction with a rule-based hardware selection engine to generate compatible PC builds from natural language requests.
 
-Total estimated development time: **approximately 135–145 hours.**
-
-
+Total estimated development time: **approximately 190-200 hours.**
 
