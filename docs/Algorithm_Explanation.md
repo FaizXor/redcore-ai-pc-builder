@@ -106,87 +106,60 @@ Once a complete build is successfully selected, the system generates the final o
 The following diagram illustrates the complete, updated rule engine workflow, including the motherboard swap logic and the different output paths.
 
 ```mermaid
-graph TD
-    %% === STYLES ===
-    classDef security fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000000
-classDef ai fill:#e8eaf6,stroke:#3949ab,stroke-width:2px,color:#000000
-classDef process fill:#e0f7fa,stroke:#006064,stroke-width:2px,color:#000000
-classDef decision fill:#fff9c4,stroke:#f57f17,color:#000000
-classDef success fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000000
-classDef failure fill:#ffcdd2,stroke:#b71c1c,stroke-width:2px,color:#000000
-classDef io fill:#fafafa,stroke:#333,color:#000000
+flowchart TD
+    Start((Start)) --> Validate[Validation & Rate Limit]
+    Validate -->|Pass| CheckMode{Mode?}
 
-    %% === START AND INPUT ===
-    Start((Start)) --> UserInput[User Input: mode, budget, inputs, etc.]
-    class UserInput io;
+    %% Experienced Path
+    CheckMode -->|Experienced| ManualLookup[Lookup CPU & GPU in DB]
+    ManualLookup --> CalcExp[Calculate Support Parts Budget]
+    CalcExp --> ExpPSU[Select PSU]
+    ExpPSU --> ExpMobo[Select Mobo]
+    ExpMobo --> ExpRamStore[Select RAM & Storage with Remainder]
+    ExpRamStore --> ExpConfidence[Confidence Check]
+    ExpConfidence --> ChatGen[AI Chat Analysis Generation]
+    ChatGen --> FinalResponse
 
-    %% === VALIDATION GATEWAY ===
-    UserInput --> Validation{Security & Validation Gateway}
-    class Validation security;
-    Validation -->|Invalid| ReturnValidationError("Return 422 Validation Error")
-    Validation -->|Valid| ModeDecision{Mode?}
-    class ModeDecision decision;
-    class ReturnValidationError failure;
+    %% Auto Path
+    CheckMode -->|Auto| AI_Extract[AI Extraction HuggingFace]
+    AI_Extract -->|Fail/Timeout| RegexFallback[Regex Budget Extraction]
+    AI_Extract -->|Success| SetParams[Set Tier, Purpose, Budget]
+    RegexFallback --> SetParams
 
-    %% === AUTO vs EXPERIENCED PATHS ===
-    subgraph Auto Mode
-        direction LR
-        AIExtraction[Build Prompt & Call AI] --> ParseAI{Parse AI Response}
-        ParseAI -->|Success| ValidateAI[Validate & Sanitize AI Output]
-        ParseAI -->|Failure / Timeout| FallbackExtraction[Use Regex & Defaults]
-        FallbackExtraction --> IntentReadyA((Intent Ready))
-        ValidateAI --> IntentReadyA
+    SetParams --> BuildLoop{Start Build Loop}
+
+    subgraph CoreBuildLoop["The Core Build Loop"]
+        BuildLoop --> SelectGPU[Select Best GPU for Tier]
+        SelectGPU -->|Found| SelectCPU[Select CPU matching GPU Level]
+        SelectCPU -->|Found| SelectPSU[Select PSU matching Wattage]
+        SelectPSU -->|Found| SelectMobo[Select Best Mobo for Tier]
+        
+        SelectMobo --> CheckCost{Total > Budget?}
+        
+        %% The Specific Motherboard Swap Logic
+        CheckCost -->|Yes Over Budget| SwapMobo[Swap to Entry Tier Motherboard]
+        SwapMobo --> ReCheckCost{Still Over Budget?}
+        
+        ReCheckCost -->|No Saved| SelectRAM
+        CheckCost -->|No Budget OK| SelectRAM
+        
+        SelectRAM[Select RAM Pref vs Budget] --> SelectStorage[Select Storage Remainder]
+        
+        %% Failure Handling
+        SelectGPU -->|Fail| DowngradeTier
+        SelectCPU -->|Fail| DowngradeTier
+        ReCheckCost -->|Yes| DowngradeTier
+        
+        DowngradeTier[Reduce Performance Tier & Retry] -->|Retries Left| BuildLoop
+        DowngradeTier -->|Max Retries| CalculateMinimum[Calculate Min Required Budget]
     end
-    
-    subgraph Experienced Mode
-        direction LR
-        ManualSetup[Use Validated Manual Inputs] --> IntentReadyB((Intent Ready))
-    end
 
-    ModeDecision -->|'auto'| AIExtraction
-    ModeDecision -->|'experienced'| ManualSetup
+    SelectStorage --> FinalResponse
+    CalculateMinimum --> FinalResponse
 
-    class AIExtraction ai;
-    class ParseAI decision;
-    class ManualSetup process;
-
-
-    %% === CONVERGE & PRE-BUILD ANALYSIS ===
-    IntentReadyA --> ProactiveAnalysis["Proactive Budget Analysis<br/><i>calcMinimum/RecommendedBudget()</i>"]
-    IntentReadyB --> ProactiveAnalysis
-    class ProactiveAnalysis process;
-    
-    ProactiveAnalysis --> BuildEngine["Core Build Engine<br/><i>selectCoreBuild() or selectExperiencedBuild()</i>"]
-    class BuildEngine process;
-
-    BuildEngine --> BuildSuccess{Build Successful?}
-    class BuildSuccess decision;
-
-    %% === FAILURE PATH ===
-    BuildSuccess -->|No - Failure| ConstructError[Construct Smart Error Response<br/><i>'Increase budget to $XYZ'</i>]
-    ConstructError --> ReturnError("Return 400 Build Error")
-    class ConstructError process;
-    class ReturnError failure;
-
-    %% === SUCCESS PATH ===
-    BuildSuccess -->|Yes - Success| PostBuildAnalysis["Post-Build Analysis & Enrichment<br/><i>buildConfidenceReport()</i>"]
-    class PostBuildAnalysis process;
-
-    PostBuildAnalysis --> AISummary["AI Chat Summary Generation<br/><i>buildChatSummaryPrompt()</i>"]
-    class AISummary ai;
-
-    AISummary --> AISummaryTimeout{AI Summary Timed Out?}
-    class AISummaryTimeout decision;
-
-    AISummaryTimeout -->|Yes| FallbackSummary[Use Pre-formatted Fallback Summary]
-    class FallbackSummary process;
-    AISummaryTimeout -->|No| FinalAssembly[Final Response Assembly]
-
-    FallbackSummary --> FinalAssembly
-    class FinalAssembly process;
-
-    FinalAssembly --> ReturnSuccess("Return 200 OK")
-    class ReturnSuccess success;  
+    FinalResponse((JSON Response))
+    FinalResponse -.->|Auto Mode| RenderCards[Frontend: Render Visual Cards]
+    FinalResponse -.->|Exp Mode| RenderChat[Frontend: Render Chat & Analysis]
 ```
 
 ### Old Algorithm Flow
