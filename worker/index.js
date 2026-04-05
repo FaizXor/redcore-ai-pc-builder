@@ -127,8 +127,10 @@ function buildChatSummaryPrompt(
   const userBudget = Number(issues.userBudget) || 0;
   const supportMissing = !ram || !motherboard || !psu || !storage;
   const isFixedNow = issues.budgetWasOverridden && !supportMissing;
-  const suggestedBudget = issues.suggestedBudget;
+  const suggestedBudget = issues.requiredBudgetToComplete ?? issues.betterBalancedBudget;
   const isLooping = userInput.toLowerCase().includes("yes") && supportMissing;
+  const requiredBudgetToComplete = issues.requiredBudgetToComplete;
+const betterBalancedBudget = issues.betterBalancedBudget;
 
   const buildList = `
 CPU: ${cpu?.Name || "❌ Not Selected"} – $${cpu?.Price || "?"}
@@ -182,7 +184,7 @@ User Input: "${userInput}"
 
 **2. IF PARTS ARE MISSING (First time fail):**
    - SAY: "The ${cpu?.Name || "CPU"} ($${cpu?.Price || "?"}) and ${gpu?.Name || "GPU"} ($${gpu?.Price || "?"}) take up most of the budget, leaving no room for the motherboard, RAM, PSU, and storage."
-   - MANDATORY: Ask: "Please increase the budget to **$${suggestedBudget}** to complete this build."
+   - MANDATORY: Ask: "Please increase the budget to **$${requiredBudgetToComplete}** to complete this build."
    - Do NOT show the list or analysis.
 
 **3. IF BUILD IS VALID (All 6 parts present):**
@@ -1077,6 +1079,8 @@ function calculateRecommendedNormalBudget(
   return null
 }
 
+
+
 function convertMinimumBuildToBuildResult(minimumBuild: any, purpose: string, minimumTier: TierText) {
   if (!minimumBuild) return null
   const { gpu, cpu, psu, motherboard, ram, storage } = minimumBuild
@@ -1259,9 +1263,12 @@ function buildConfidenceReport(buildResult: any) {
   }
 }
 
+
+
 // ======================================================
 // 15. WORKER FETCH HANDLER (WITH VALIDATION)
 // ======================================================
+
 
 export default {
     async fetch(request: Request, env: Env): Promise<Response> {
@@ -1342,6 +1349,8 @@ export default {
         // CONTINUE WITH VALIDATED + SANITIZED DATA
         // ============================================
 
+
+        
         const chatHistory = safe.history || []
         const isExperiencedMode = safe.mode === "experienced"
         const pendingSuggestion = safe.pending_suggestion
@@ -1443,6 +1452,7 @@ export default {
             }
         }
 
+        
         // BUILD SELECTION
         let buildResult: any
         if (isExperiencedMode) {
@@ -1479,6 +1489,8 @@ export default {
             )
         }
 
+
+        
         // DATA PREP
         const finalCpu = buildResult.cpuResult?.cpu
         const finalGpu = buildResult.gpuResult?.gpu
@@ -1503,26 +1515,32 @@ export default {
               Number(buildResult.storageResult?.storage?.Price || 0)
 
                 // FIX: SAFE SUGGESTION LOGIC
-        let nextSuggestion: number | null = null;
+        let requiredBudgetToComplete: number | null = null;
+let betterBalancedBudget: number | null = null;
 
-        // 1. If we have a calculated recommendation from the build engine, use that (Most Accurate)
-        if (buildResult?.recommendedMinimumBudget) {
-             nextSuggestion = buildResult.recommendedMinimumBudget;
-        }
-        // 2. If not, try to estimate based on the parts we found
-        else if (missingParts) {
-            nextSuggestion = Math.ceil(realTotalCost / 50) * 50 + 50;
-        }
+// If parts are missing, calculate the minimum budget needed to complete the build
+if (missingParts) {
+    if (buildResult?.recommendedMinimumBudget) {
+        requiredBudgetToComplete = buildResult.recommendedMinimumBudget;
+    } else {
+        requiredBudgetToComplete = Math.ceil(realTotalCost / 50) * 50 + 50;
+    }
 
-        // 3. Failsafe: If suggestion is still lower than current budget, force it higher
-        if (nextSuggestion !== null && nextSuggestion <= budget) {
-            nextSuggestion = budget + 200;
-        }
-        
-        // 4. Default if all else fails
-        if (missingParts && !nextSuggestion) {
-            nextSuggestion = budget + 250;
-        }
+    // only force higher if it is truly not above current budget
+    if (requiredBudgetToComplete !== null && requiredBudgetToComplete <= budget) {
+        requiredBudgetToComplete = budget + 100;
+    }
+}
+
+
+        const recommendedNormalBudget =
+            buildResult.recommendedNormalBudget ?? null
+
+
+// If build is valid, optionally suggest a better-balanced budget
+if (!missingParts && recommendedNormalBudget && recommendedNormalBudget > budget) {
+    betterBalancedBudget = recommendedNormalBudget;
+}
 
         const fullBuildData = {
             cpu: finalCpu,
@@ -1535,6 +1553,8 @@ export default {
             totalCost: Math.ceil(realTotalCost),
         }
 
+
+        
         // CONFIDENCE REPORT
         const confidence = buildConfidenceReport(buildResult)
 
@@ -1542,13 +1562,15 @@ export default {
 
         
         const budgetIssues = {
-            userBudget: budget,
-            actualCost: fullBuildData.totalCost,
-            missingParts,
-            wasAdjusted: buildResult.budgetWasAdjusted || false,
-            budgetWasOverridden,
-            suggestedBudget: nextSuggestion,
-        }
+    userBudget: budget,
+    actualCost: fullBuildData.totalCost,
+    missingParts,
+    wasAdjusted: buildResult.budgetWasAdjusted || false,
+    budgetWasOverridden,
+    suggestedBudget: missingParts ? requiredBudgetToComplete : betterBalancedBudget,
+    requiredBudgetToComplete,
+    betterBalancedBudget,
+}
 
         const buildMode = isExperiencedMode
             ? "experienced"
@@ -1561,26 +1583,15 @@ export default {
             budget - fullBuildData.totalCost
         )
 
-        const recommendedNormalBudget =
-            buildResult.recommendedNormalBudget ?? null
+        let upgradeSuggestion: string | null = null;
 
-        let upgradeSuggestion: string | null = null
-        if (
-            !missingParts &&
-            recommendedNormalBudget &&
-            recommendedNormalBudget > budget
-        ) {
-            upgradeSuggestion = `This build works at your budget, but increasing to $${recommendedNormalBudget} would unlock a better-balanced build.`
-        } else if (!missingParts && remainingBudget > 100) {
-            upgradeSuggestion = `You have $${remainingBudget} remaining — consider upgrading RAM or storage.`
-        }
+if (!missingParts && betterBalancedBudget) {
+    upgradeSuggestion = `This build works within your current budget, but $${betterBalancedBudget} would allow a better-balanced configuration.`;
+} else if (!missingParts && remainingBudget > 100) {
+    upgradeSuggestion = `You have $${remainingBudget} remaining — consider upgrading RAM, storage, or the motherboard.`;
+}
 
         const rawInput = safe.inputs || userText || ""
-
-// CHANGE: If build is successful, use recommendedNormalBudget as a suggestion for an upgrade
-if (!missingParts && recommendedNormalBudget && recommendedNormalBudget > budget) {
-    nextSuggestion = recommendedNormalBudget;
-}
 
 
         // CHAT WITH TIMEOUT + ANALYSIS
@@ -1593,6 +1604,7 @@ if (!missingParts && recommendedNormalBudget && recommendedNormalBudget > budget
             confidence
         )
 
+        
         let chatResponseText = ""
 
         try {
@@ -1627,7 +1639,7 @@ if (!missingParts && recommendedNormalBudget && recommendedNormalBudget > budget
         } catch (e) {
             // FALLBACK
             if (missingParts) {
-                chatResponseText = `⏳ Connection timeout.\nWe selected **${finalCpu?.Name}** + **${finalGpu?.Name}**, but the $${budget} budget doesn't cover all support parts.\nPlease increase to **$${nextSuggestion}** to complete this build.`
+                chatResponseText = `⏳ Connection timeout.\nWe selected **${finalCpu?.Name}** + **${finalGpu?.Name}**, but the $${budget} budget doesn't cover all support parts.\nPlease increase to **$${requiredBudgetToComplete}** to complete this build.`
             } else {
                 const psuW = Number(fullBuildData.psu?.Wattage ?? 0)
                 const reqW = Number(
@@ -1645,6 +1657,7 @@ if (!missingParts && recommendedNormalBudget && recommendedNormalBudget > budget
 
                 chatResponseText = `⏳ AI timed out – here's your build with manual analysis:
 
+                
 **Build List:**
 • CPU: ${finalCpu?.Name} – $${finalCpu?.Price}
 • GPU: ${finalGpu?.Name} – $${finalGpu?.Price}
@@ -1665,21 +1678,25 @@ ${psuW - reqW > 50 ? `• PSU has ${psuW - reqW}W headroom for GPU upgrades` : "
 
         // RETURN
         return new Response(
-            JSON.stringify({
-                status: "ok",
-                extracted,
-                build: fullBuildData,
-                remainingBudget,
-                buildMode,
-                recommendedNormalBudget,
-                upgradeSuggestion,
-                confidenceReport: confidence,
-                raw_input: rawInput,
-                chat_response: chatResponseText,
-                updated_budget: budgetWasOverridden ? budget : null,
-                suggested_budget: nextSuggestion,
-            }),
-            { status: 200, headers: corsHeaders() }
-        )
+    JSON.stringify({
+        status: "ok",
+        extracted,
+        build: fullBuildData,
+        remainingBudget,
+        buildMode,
+        recommendedNormalBudget,
+        upgradeSuggestion,
+        confidenceReport: confidence,
+        raw_input: rawInput,
+        chat_response: chatResponseText,
+        updated_budget: budgetWasOverridden ? budget : null,
+        suggested_budget: missingParts ? requiredBudgetToComplete : betterBalancedBudget,
+        required_budget_to_complete: requiredBudgetToComplete,
+        better_balanced_budget: betterBalancedBudget,
+        user_budget: budget,
+        build_total: fullBuildData.totalCost,
+    }),
+    { status: 200, headers: corsHeaders() }
+)
     },
 }
