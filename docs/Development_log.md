@@ -272,6 +272,18 @@ However, the core work was done by me:
 
 AI was used as a tool to support development and learning, not to replace system design or decision-making.
 
+### Time Estimation Note
+The time estimates in this document are approximate.
+
+During development, I did not track my time precisely in real-time. Instead, this log was reconstructed after the project was completed by reviewing development phases, files, commits, and overall progress.
+
+The estimates are based on:
+- how long each phase lasted (days/weeks)
+- how much work was completed in each phase
+- personal recollection of time spent during development
+
+While the exact hours may not be perfectly accurate, they reflect a realistic approximation of the total effort involved in building the system.
+
 #### Outcome:
 By the end of this phase, the RedCore system evolved from a basic rule-based builder into a **robust, adaptive build engine** capable of handling real-world constraints, budget limitations, and different user experience levels.
 
