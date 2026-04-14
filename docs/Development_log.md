@@ -1,6 +1,8 @@
 # RedCore AI PC Builder
 ## Development Log
 
+**Project Type:** Solo Project  
+
 This document describes the development process of the RedCore AI PC Builder project, including the main phases, tools used, challenges encountered, and solutions implemented during development.
 
 
