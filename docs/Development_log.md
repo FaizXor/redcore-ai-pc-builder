@@ -91,7 +91,7 @@ The workflow contains more than 500 modules handling rule-based hardware selecti
 As the system grew, the automation scenario became very large (500+ components). This started causing performance issues and lag inside Make.com. In addition, the free usage limits and credit restrictions made it difficult to continue scaling the automation system.
 
 #### Solution:
-Because of these limitations, i decided to migrate the system from Make.com to a custom coded backend implementation.
+Because of these limitations, I decided to migrate the system from Make.com to a custom coded backend implementation.
 
 
 
@@ -101,7 +101,7 @@ Because of these limitations, i decided to migrate the system from Make.com to a
 **~3 days × ~3.5h ≈ 10–11 hours**
 
 #### Work:
-After the limitations of the Make.com automation system, i decided to migrate the backend logic to a Cloudflare Worker API. This approach allowed the system to handle more requests and provided a scalable backend while still remaining suitable for the free tier during the beta stage.
+After the limitations of the Make.com automation system, I decided to migrate the backend logic to a Cloudflare Worker API. This approach allowed the system to handle more requests and provided a scalable backend while still remaining suitable for the free tier during the beta stage.
 
 The automation logic that was previously implemented in Make.com was gradually translated into code. The hardware database was exported from Airtable and converted into JSON files so that it could be used directly by the backend.
 
@@ -143,7 +143,7 @@ By the end of this phase, the system could accept a user request, extract struct
 **~2 weeks (8 days) × 4h ≈ 32 hours**
 
 #### Work:
-During this phase i worked on designing the frontend interface of the project. i tested several website builders and eventually chose Framer because its workspace and design tools felt similar to Figma and were easy to work with for prototyping.
+During this phase I worked on designing the frontend interface of the project. I tested several website builders and eventually chose Framer because its workspace and design tools felt similar to Figma and were easy to work with for prototyping.
 
 The first UI layouts were designed in PowerPoint to plan the page structure and elements. After that, the designs were recreated and implemented inside Framer to build the actual webpage prototype.
 
@@ -153,17 +153,17 @@ The first UI layouts were designed in PowerPoint to plan the page structure and 
 - YouTube (learning Framer and UI design basics)
 
 #### Challenge:
-Since i had not used Figma or similar website design tools for a long time, i struggled at first to understand how Framer's layout system and components worked.
+Since I had not used Figma or similar website design tools for a long time, I struggled at first to understand how Framer's layout system and components worked.
 
 #### Solution:
-To overcome this, i watched YouTube tutorials to learn the basics of Framer and experimented with templates and example projects. This helped us understand the workflow faster and recreate our planned UI design.
+To overcome this, I watched YouTube tutorials to learn the basics of Framer and experimented with templates and example projects. This helped us understand the workflow faster and recreate our planned UI design.
 
 
 ### Phase 7 — Video Recording & Editing
 **~1 week × ~3.5h ≈ 24–25 hours**
 
 #### Work:
-During this phase i created promotional and demonstration videos to present the RedCore AI PC Builder concept online.
+During this phase I created promotional and demonstration videos to present the RedCore AI PC Builder concept online.
 
 A main demo video explaining how the system works was produced and published on YouTube. In addition, 17 short-form videos were created to test different formats and attract attention to the project. These videos were uploaded to YouTube Shorts, TikTok, and Instagram.
 
@@ -189,15 +189,15 @@ Despite the inconsistent results, multiple short videos were produced and publis
 **~5 days × ~3.5h ≈ 17–18 hours**
 
 #### Work:
-During this phase i focused on documenting the entire project and organizing all the resources into a structured archive. The goal was to make the idea and system easier to understand for both developers and users.
+During this phase I focused on documenting the entire project and organizing all the resources into a structured archive. The goal was to make the idea and system easier to understand for both developers and users.
 
 This included writing the README, creating development logs, organizing design assets, system diagrams, evidence screenshots, and media files into clear folders.
 
 #### Challenge:
-Because i did not log every step during development, collecting the files and reconstructing the timeline was sometimes difficult.
+Because I did not log every step during development, collecting the files and reconstructing the timeline was sometimes difficult.
 
 #### Solution:
-To solve this, i reviewed all available materials and brainstormed the development process step by step to reconstruct the timeline and complete the documentation.
+To solve this, I reviewed all available materials and brainstormed the development process step by step to reconstruct the timeline and complete the documentation.
 
 #### Outcome:
 By the end of this phase, the project documentation was completed, and all resources were organized into a structured archive, making the project easier to understand, review, and present.
