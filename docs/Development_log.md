@@ -257,6 +257,21 @@ This made the system much more flexible and realistic under different budget con
   - Experienced Mode (detailed output)
 - Designed a custom **404 error page** with interactive/glitch visual style to enhance user experience
 
+### AI Usage & Development Approach
+
+I used AI tools (ChatGPT) as a development assistant during development, mainly for:
+- learning unfamiliar technologies (JavaScript, Cloudflare Workers)
+- debugging and improving code
+- translating logic from Make.com into a coded backend
+
+However, the core work was done by me:
+- I designed the system architecture and workflows
+- I built and iterated the automation logic
+- I created the UI and overall user experience
+- I tested and refined the system across multiple phases
+
+AI was used as a tool to support development and learning, not to replace system design or decision-making.
+
 #### Outcome:
 By the end of this phase, the RedCore system evolved from a basic rule-based builder into a **robust, adaptive build engine** capable of handling real-world constraints, budget limitations, and different user experience levels.
 
